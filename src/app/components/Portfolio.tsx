@@ -84,14 +84,14 @@ export default function Portfolio() {
       </div>
 
       {/* Portfolio Title */}
-      <h2 className="text-white text-5xl mb-8 z-10 tracking-widest text-center">MY WORKS</h2>
+      <h2 className="text-brandBeige text-5xl mb-8 z-10 tracking-widest text-center">MY WORKS</h2>
 
       {/* Portfolio Gallery */}
       <div className="w-full max-w-6xl mx-auto z-10 relative flex flex-col items-center">
         {/* Frames Layout */}
         <div className="grid grid-cols-3 gap-4 px-4 w-full">
           {/* Left Column */}
-          <div className="flex flex-col space-y-4 items-center">
+          <div className="flex flex-col space-y-10 items-center mr-60">
             {works.slice(0, 3).map((work, index) => (
               <div
                 key={work.id}
@@ -135,7 +135,7 @@ export default function Portfolio() {
           </div>
 
           {/* Right Column */}
-          <div className="flex flex-col space-y-4 items-center">
+          <div className="flex flex-col space-y-10 items-center ml-60">
             {works.slice(3).map((work, index) => (
               <div
                 key={work.id}
