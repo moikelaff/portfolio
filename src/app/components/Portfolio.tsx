@@ -119,8 +119,14 @@ export default function Portfolio() {
                     <h3 className="text-3xl mb-2 text-brandBeige">{works[activeIndex].title}</h3>
                   </div>
                   <div className="bg-brandBrown bg-opacity-50 backdrop-blur-sm rounded-lg p-4 w-full text-center mt-4 border-1 border-brandBeige">
+                    <p className="text-xs leading-relaxed tracking-wide text-brandBeige mb-4 ">
+                      {works[activeIndex].period}
+                    </p>
                     <p className="text-sm leading-relaxed tracking-wide text-brandBeige">
                       {works[activeIndex].description}
+                    </p>
+                    <p className="text-xs leading-relaxed tracking-wide text-brandBeige mt-4">
+                      {works[activeIndex].tags.map((tag) => `${tag}`).join(" | ")}
                     </p>
                   </div>
                 </div>
