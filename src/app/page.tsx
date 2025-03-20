@@ -6,6 +6,7 @@ export default function Home() {
       <Hero />
       <AboutMe/>
       <Portfolio/>
+      <Contacts />
       {/* <HeroSection />
       <AboutMe/>
       <Portfolio/>

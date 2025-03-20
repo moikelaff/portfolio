@@ -71,7 +71,7 @@ export default function Portfolio() {
   };
 
   return (
-    <section id="portfolio" className="relative min-h-screen flex flex-col items-center justify-center py-10">
+    <section id="portfolio" className="relative min-h-screen flex flex-col items-center justify-center py-10  inset-0 p-1 bg-brandBeige">
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <Image
