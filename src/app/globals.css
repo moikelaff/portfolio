@@ -1,19 +1,12 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
   --background: #000000;
   --foreground: #FFFFFF;
-  --beige: #EBD7CF;
-  --brown: #22140B;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-beige: var(--beige);
-  --color-brown: var(--brown);
-  --font-sans: "Inter", sans-serif;
-  --font-serif: "Cinzel", serif;
+  --brandBeige: #EBD7CF;
+  --brandBrown: #22140B;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -23,45 +16,25 @@
   }
 }
 
-@layer base {
-  body {
-    background: var(--background);
-    color: var(--foreground);
-    font-family: var(--font-sans);
-  }
-
-  h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-serif);
-    font-weight: 400;
-    letter-spacing: 0.03em;
-  }
-
-  html {
-    scroll-behavior: smooth;
-  }
-
-  section {
-    min-height: 100vh;
-    position: relative;
-  }
-
-  .container {
-    max-width: 1400px;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: 'Cinzel', serif;
 }
 
-@layer components {
-  .btn-beige {
-    background-color: var(--beige);
-    color: #000000;
-  }
+html {
+  scroll-behavior: smooth;
+}
 
-  .btn-brown {
-    background-color: var(--brown);
-    color: #FFFFFF;
-  }
+section {
+  min-height: 100vh;
+  position: relative;
+}
+
+.container {
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }

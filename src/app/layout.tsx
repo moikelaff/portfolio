@@ -1,11 +1,14 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import { Inter, Cinzel } from 'next/font/google';
+import { Cinzel } from 'next/font/google';
+import Navbar from "./components/navbar";
 
-const inter = Inter({ subsets: ['latin'] });
+
 const cinzel = Cinzel({
   subsets: ['latin'],
+  weight: ['400', '500', '700'],
   display: 'swap',
+  variable: '--font-cinzel',
 });
 
 export const metadata: Metadata = {
@@ -19,11 +22,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <head>
-        <link rel="icon" href="/favicon.ico" />
-      </head>
-      <body className={`${inter.className} ${cinzel.className}`}>
+    <html lang="en" className={cinzel.className}> {/* Apply the className for the font */}
+      <body>
+        <Navbar />
         {children}
       </body>
     </html>

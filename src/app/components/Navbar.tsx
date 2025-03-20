@@ -1,41 +1,44 @@
 "use client";
+
+import { useState } from "react";
+import React from 'react';
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
 
-const Navbar = () => {
-  const [scrolled, setScrolled] = useState(false);
+export default function Navbar() {
+    const [isOpen, setIsOpen] = useState(false);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const isScrolled = window.scrollY > 10;
-      if (isScrolled !== scrolled) {
-        setScrolled(isScrolled);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [scrolled]);
-
-  return (
-    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-black/90 backdrop-blur-sm' : 'bg-transparent'}`}>
-      <div className="container mx-auto px-6 py-4">
-        <div className="flex justify-center md:justify-end space-x-8">
-          <Link href="#about" style={{ color: 'var(--beige)', fontFamily: 'var(--font-serif)' }} className="hover:text-white transition-colors">
-            ABOUT ME
-          </Link>
-          <Link href="#portfolio" style={{ color: 'var(--beige)', fontFamily: 'var(--font-serif)' }} className="hover:text-white transition-colors">
-            PORTFOLIO
-          </Link>
-          <Link href="#contacts" style={{ color: 'var(--beige)', fontFamily: 'var(--font-serif)' }} className="hover:text-white transition-colors">
-            CONTACTS
-          </Link>
-        </div>
-      </div>
-    </nav>
+    return (
+        <header className="fixed w-full z-50">
+        <nav className="backdrop-blur-md bg-opacity-70" style={{ backgroundColor: 'rgba(34, 20, 11, 0.7)' }}>
+            <div className="container mx-auto py-4">
+            <ul className="flex justify-center space-x-16">
+                <li>
+                <Link 
+                    href="#about" 
+                    className="text-white hover:text-[#EBD7CF] transition-colors duration-300 text-lg tracking-wide"
+                >
+                    About Me
+                </Link>
+                </li>
+                <li>
+                <Link 
+                    href="#portfolio" 
+                    className="text-white hover:text-[#EBD7CF] transition-colors duration-300 text-lg tracking-wide"
+                >
+                    Portfolio
+                </Link>
+                </li>
+                <li>
+                <Link 
+                    href="#contacts" 
+                    className="text-white hover:text-[#EBD7CF] transition-colors duration-300 text-lg tracking-wide"
+                >
+                    Contacts
+                </Link>
+                </li>
+            </ul>
+            </div>
+        </nav>
+        </header>
   );
 };
-
-export default Navbar;

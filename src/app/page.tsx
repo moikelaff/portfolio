@@ -1,12 +1,12 @@
-import {Navbar, HeroSection, AboutMe, Portfolio, Contacts} from './components';
+import {HeroSection, AboutMe, Portfolio, Contacts} from './components';
 
 export default function Home() {
   return (
     <>
-      <HeroSection />
+      {/* <HeroSection />
       <AboutMe/>
       <Portfolio/>
-      <Contacts />
+      <Contacts /> */}
     </>
   );
 }
