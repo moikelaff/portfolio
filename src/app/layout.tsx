@@ -22,11 +22,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={cinzel.className}> {/* Apply the className for the font */}
+    <html lang="en" className={cinzel.className}> 
       <body>
         <Navbar />
         {children}
-      </body>
+      </body> 
     </html>
   );
 }

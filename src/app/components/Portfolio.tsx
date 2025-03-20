@@ -71,7 +71,7 @@ export default function Portfolio() {
   };
 
   return (
-    <section id="portfolio" className="relative min-h-screen flex flex-col items-center justify-center py-10  inset-0 p-1 bg-brandBeige">
+    <section id="Portfolio" className="relative min-h-screen flex flex-col items-center justify-center py-10 border-r-4 border-l-4 border-brandBeige">
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <Image
@@ -84,7 +84,7 @@ export default function Portfolio() {
       </div>
 
       {/* Portfolio Title */}
-      <h2 className="text-brandBeige text-5xl mb-8 z-10 tracking-widest text-center">MY WORKS</h2>
+      <h2 className="text-brandBeige text-6xl mb-8 z-10 tracking-widest text-center">MY WORKS</h2>
 
       {/* Portfolio Gallery */}
       <div className="w-full max-w-6xl mx-auto z-10 relative flex flex-col items-center">
@@ -115,10 +115,10 @@ export default function Portfolio() {
             {works[activeIndex] && (
               <>
                 <div className="relative flex flex-col items-center w-full">
-                  <div className="bg-brandBrown bg-opacity-50 backdrop-blur-sm rounded-lg p-1 w-full text-center border-1 border-brandBeige">
+                  <div className="bg-brandBrown bg-opacity-50 backdrop-blur-sm rounded-lg p-1 w-full text-center">
                     <h3 className="text-3xl mb-2 text-brandBeige">{works[activeIndex].title}</h3>
                   </div>
-                  <div className="bg-brandBrown bg-opacity-50 backdrop-blur-sm rounded-lg p-4 w-full text-center mt-4 border-1 border-brandBeige">
+                  <div className="bg-brandBrown bg-opacity-50 backdrop-blur-sm rounded-lg p-4 w-full text-center mt-4">
                     <p className="text-xs leading-relaxed tracking-wide text-brandBeige mb-4 ">
                       {works[activeIndex].period}
                     </p>

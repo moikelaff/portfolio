@@ -5,7 +5,7 @@ import Image from 'next/image';
 
 const Contacts = () => {
   return (
-    <section className="relative h-screen w-full overflow-hidden">
+    <section id="Contacts" className="relative h-screen w-full overflow-hidden">
       <div className="absolute inset-0 p-1 bg-brandBeige">
         <div className="relative h-full w-full">
           <Image

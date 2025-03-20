@@ -7,10 +7,6 @@ export default function Home() {
       <AboutMe/>
       <Portfolio/>
       <Contacts />
-      {/* <HeroSection />
-      <AboutMe/>
-      <Portfolio/>
-      <Contacts /> */}
     </>
   );
 }
