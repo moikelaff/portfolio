@@ -1,17 +1,16 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
-import { Cinzel } from 'next/font/google';
+import { Inter, Cinzel } from 'next/font/google';
 
 const inter = Inter({ subsets: ['latin'] });
-const cinzel = Cinzel({ 
+const cinzel = Cinzel({
   subsets: ['latin'],
   display: 'swap',
 });
 
 export const metadata: Metadata = {
-  title: 'Dylan Adiptawijaya | Portfolio',
-  description: 'Personal portfolio of Dylan Adiptawijaya, software and cloud engineer',
+  title: 'Dylan Adiprawira',
+  description: 'Personal portfolio',
 };
 
 export default function RootLayout({
@@ -23,14 +22,8 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link rel="icon" href="/favicon.ico" />
-        <style jsx global>{`
-          :root {
-            --font-sans: ${inter.style.fontFamily};
-            --font-serif: ${cinzel.style.fontFamily};
-          }
-        `}</style>
       </head>
-      <body>
+      <body className={`${inter.className} ${cinzel.className}`}>
         {children}
       </body>
     </html>
