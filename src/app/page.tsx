@@ -4,6 +4,7 @@ export default function Home() {
   return (
     <>
       <Hero />
+      <AboutMe/>
       {/* <HeroSection />
       <AboutMe/>
       <Portfolio/>

@@ -11,10 +11,10 @@ export default function Navbar() {
         <header className="fixed w-full z-50">
         <nav className="backdrop-blur-md bg-opacity-70" style={{ backgroundColor: 'rgba(34, 20, 11, 0.7)' }}>
             <div className="container mx-auto py-4">
-            <ul className="flex justify-center space-x-16">
+            <ul className="flex justify-center space-x-16 text-lg">
                 <li>
                 <Link 
-                    href="#about" 
+                    href="#AboutMe" 
                     className="text-white hover:text-[#EBD7CF] transition-colors duration-300 text-lg tracking-wide"
                 >
                     About Me
