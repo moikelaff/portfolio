@@ -76,38 +76,38 @@ export default function Portfolio() {
     setActiveIndex(index);
   };
 
-  // Animation variants with FASTER durations
+  // FASTER animation variants with reduced durations
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1, // Reduced from 0.2
-        delayChildren: 0.2, // Reduced from 0.3
+        staggerChildren: 0.05,
+        delayChildren: 0.1, 
       }
     }
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 15 }, 
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.3 } // Reduced from 0.5
+      transition: { duration: 0.2 } 
     }
   };
 
   const detailsVariants = {
-    hidden: { opacity: 0, scale: 0.95 },
+    hidden: { opacity: 0, scale: 0.98 },
     visible: {
       opacity: 1,
       scale: 1,
-      transition: { duration: 0.25 } // Reduced from 0.4
+      transition: { duration: 0.15 } 
     },
     exit: {
       opacity: 0,
-      scale: 0.95,
-      transition: { duration: 0.2 } // Reduced from 0.3
+      scale: 0.98,
+      transition: { duration: 0.1 }
     }
   };
 
@@ -140,9 +140,9 @@ export default function Portfolio() {
 
       {/* Portfolio Title */}
       <motion.h2 
-        initial={{ opacity: 0, y: -30 }}
+        initial={{ opacity: 0, y: -20 }} 
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.1 }} // Faster animation
+        transition={{ duration: 0.3, delay: 0.05 }}
         className="text-brandBeige text-5xl sm:text-6xl md:text-7xl mb-6 md:mb-8 z-10 tracking-widest text-center font-cinzel"
       >
         MY WORKS
@@ -155,21 +155,115 @@ export default function Portfolio() {
         initial="hidden"
         animate={isLoaded ? "visible" : "hidden"}
       >
-        {/* Frames Layout - Improved responsiveness */}
-        <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr_1fr] gap-6 sm:gap-8 px-4 w-full">
+        {/* Mobile Layout */}
+        <div className="md:hidden w-full px-4 flex flex-col items-center">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={works[activeIndex].id + "-mobile"}
+              className="w-full flex flex-col items-center"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.1 }} 
+            >
+              {/* Project Image - Removed border from mobile image */}
+              <div className="relative w-full aspect-[4/3] max-w-xs mb-4 overflow-hidden rounded-lg shadow-lg">
+                <Image
+                  src={works[activeIndex].image}
+                  alt={`${works[activeIndex].title} Project`}
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              
+              {/* Project Title */}
+              <motion.div 
+                className="bg-brandBrown bg-opacity-70 backdrop-blur-sm rounded-lg p-2 w-full max-w-xs text-center mb-3"
+              >
+                <h3 className="text-2xl text-brandBeige font-cinzel">{works[activeIndex].title}</h3>
+                <p className="text-xs text-brandBeige font-cinzel mt-1">
+                  {works[activeIndex].period}
+                </p>
+              </motion.div>
+              
+              {/* Project Description */}
+              <motion.div 
+                className="bg-brandBrown bg-opacity-70 backdrop-blur-sm rounded-lg p-4 w-full max-w-xs text-center mb-4"
+              >
+                <p className="text-sm leading-relaxed text-brandBeige">
+                  {works[activeIndex].description}
+                </p>
+                <div className="flex flex-wrap justify-center gap-2 mt-4">
+                  {works[activeIndex].tags?.map((tag, i) => (
+                    <span 
+                      key={i}
+                      className="text-xs bg-brandBeige bg-opacity-20 text-brandBeige px-2 py-1 rounded-full"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
+            </motion.div>
+          </AnimatePresence>
+          
+          {/* Navigation buttons for mobile */}
+          <div className="flex justify-between w-full max-w-xs mt-2">
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              transition={{ duration: 0.15 }} 
+              className="text-brandBeige bg-brandBrown bg-opacity-70 rounded-full p-2"
+              onClick={() => setActiveIndex((prev) => (prev - 1 + works.length) % works.length)}
+              aria-label="Previous project"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg>
+            </motion.button>
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              transition={{ duration: 0.15 }}
+              className="text-brandBeige bg-brandBrown bg-opacity-70 rounded-full p-2"
+              onClick={() => setActiveIndex((prev) => (prev + 1) % works.length)}
+              aria-label="Next project"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </motion.button>
+          </div>
+          
+          {/* Mobile navigation dots*/}
+          <div className="flex justify-center mt-4 space-x-2">
+            {works.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setActiveIndex(index)}
+                className={`w-2 h-2 rounded-full transition-all duration-150 ${
+                  activeIndex === index ? 'bg-brandBeige w-4' : 'bg-brandBeige bg-opacity-50'
+                }`}
+                aria-label={`Go to project ${index + 1}`}
+              />
+            ))}
+          </div>
+        </div>
+        
+        {/* Desktop Layout*/}
+        <div className="hidden md:grid grid-cols-[1fr_2fr_1fr] gap-6 sm:gap-8 px-4 w-full">
           {/* Left Column */}
-          <div className="flex flex-col space-y-6 sm:space-y-8 items-center md:mr-4 order-2 md:order-1">
+          <div className="flex flex-col space-y-6 sm:space-y-8 items-center md:mr-4">
             {works.slice(0, 3).map((work, index) => (
               <motion.div
                 key={work.id}
                 variants={itemVariants}
                 onClick={() => handleWorkClick(index)}
-                className={`cursor-pointer transition-all duration-200 hover:scale-105 relative ${
+                className={`cursor-pointer transition-all duration-150 hover:scale-105 relative ${
                   activeIndex === index ? 'scale-105 z-20' : 'opacity-80 hover:opacity-100'
                 }`}
                 whileHover={{ 
-                  rotate: [-1, 1, -1, 0],
-                  transition: { duration: 0.3 } // Faster animation
+                  rotate: [-0.5, 0.5, -0.5, 0], 
                 }}
                 whileTap={{ scale: 0.95 }}
                 aria-label={`Select ${work.title} project`}
@@ -181,12 +275,12 @@ export default function Portfolio() {
                   <motion.div 
                     className="absolute -inset-2 rounded-md"
                     style={{ 
-                      border: '2px solid #D4AF37', // Gold color
+                      border: '2px solid #D4AF37',
                       zIndex: -1,
                     }}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    transition={{ duration: 0.2 }}
+                    transition={{ duration: 0.1 }}
                   />
                 )}
                 <div className="relative w-48 h-32 shadow-lg overflow-hidden rounded-md">
@@ -194,9 +288,9 @@ export default function Portfolio() {
                     src={work.image}
                     alt={`${work.title} Project`}
                     fill
-                    className="object-cover transition-transform duration-500 hover:scale-110"
+                    className="object-cover transition-transform duration-300 hover:scale-110" 
                   />
-                  <div className={`absolute inset-0 bg-brandBrown transition-opacity duration-200 ${
+                  <div className={`absolute inset-0 bg-brandBrown transition-opacity duration-150 ${
                     activeIndex === index ? 'opacity-0' : 'opacity-40 hover:opacity-10'
                   }`}></div>
                 </div>
@@ -204,8 +298,8 @@ export default function Portfolio() {
             ))}
           </div>
 
-          {/* Middle Column (Active Work Details) - Improved transitions and wider */}
-          <div className="col-span-1 flex flex-col items-center justify-center h-full space-y-4 relative order-1 md:order-2 mb-8 md:mb-0">
+          {/* Middle Column (Active Work Details) - Desktop only */}
+          <div className="flex flex-col items-center justify-center h-full space-y-4 relative">
             <AnimatePresence mode="wait">
               {works[activeIndex] && (
                 <motion.div
@@ -218,8 +312,8 @@ export default function Portfolio() {
                 >
                   <motion.div 
                     className="bg-brandBrown bg-opacity-50 backdrop-blur-sm rounded-lg p-2 w-full text-center"
-                    whileHover={{ scale: 1.02 }}
-                    transition={{ type: "spring", stiffness: 400 }}
+                    whileHover={{ scale: 1.01 }} 
+                    transition={{ type: "spring", stiffness: 500 }}
                   >
                     <h3 className="text-3xl md:text-4xl mb-2 text-brandBeige font-cinzel">{works[activeIndex].title}</h3>
                   </motion.div>
@@ -227,9 +321,9 @@ export default function Portfolio() {
                   {/* Wider text container */}
                   <motion.div 
                     className="bg-brandBrown bg-opacity-50 backdrop-blur-sm rounded-lg p-4 md:p-8 w-full text-center mt-4 min-h-[240px]"
-                    initial={{ y: 20, opacity: 0 }}
+                    initial={{ y: 15, opacity: 0 }} 
                     animate={{ y: 0, opacity: 1 }}
-                    transition={{ delay: 0.1, duration: 0.25 }} 
+                    transition={{ delay: 0.05, duration: 0.18 }} 
                   >
                     <p className="text-xs md:text-sm leading-relaxed tracking-wide text-brandBeige mb-6 font-cinzel">
                       {works[activeIndex].period}
@@ -242,9 +336,9 @@ export default function Portfolio() {
                         <motion.span 
                           key={i}
                           className="text-xs bg-brandBeige bg-opacity-20 text-brandBeige px-2 py-1 rounded-full"
-                          initial={{ opacity: 0, scale: 0.8 }}
+                          initial={{ opacity: 0, scale: 0.9 }} 
                           animate={{ opacity: 1, scale: 1 }}
-                          transition={{ delay: 0.15 + (i * 0.05) }}
+                          transition={{ delay: 0.08 + (i * 0.03) }} 
                         >
                           {tag}
                         </motion.span>
@@ -256,6 +350,7 @@ export default function Portfolio() {
                     <motion.button
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.9 }}
+                      transition={{ duration: 0.15 }} 
                       className="text-brandBeige bg-brandBrown bg-opacity-50 rounded-full p-2"
                       onClick={(e) => {
                         e.stopPropagation();
@@ -270,6 +365,7 @@ export default function Portfolio() {
                     <motion.button
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.9 }}
+                      transition={{ duration: 0.15 }} 
                       className="text-brandBeige bg-brandBrown bg-opacity-50 rounded-full p-2"
                       onClick={(e) => {
                         e.stopPropagation();
@@ -288,18 +384,18 @@ export default function Portfolio() {
           </div>
 
           {/* Right Column */}
-          <div className="flex flex-col space-y-6 sm:space-y-8 items-center md:ml-4 order-3">
+          <div className="flex flex-col space-y-6 sm:space-y-8 items-center md:ml-4">
             {works.slice(3).map((work, index) => (
               <motion.div
                 key={work.id}
                 variants={itemVariants}
                 onClick={() => handleWorkClick(index + 3)}
-                className={`cursor-pointer transition-all duration-200 hover:scale-105 relative ${
+                className={`cursor-pointer transition-all duration-150 hover:scale-105 relative ${
                   activeIndex === index + 3 ? 'scale-105 z-20' : 'opacity-80 hover:opacity-100'
                 }`}
                 whileHover={{ 
-                  rotate: [1, -1, 1, 0],
-                  transition: { duration: 0.3 } // Faster animation
+                  rotate: [0.5, -0.5, 0.5, 0],
+                  transition: { duration: 0.15 } 
                 }}
                 whileTap={{ scale: 0.95 }}
                 aria-label={`Select ${work.title} project`}
@@ -311,12 +407,12 @@ export default function Portfolio() {
                   <motion.div 
                     className="absolute -inset-2 rounded-md"
                     style={{ 
-                      border: '2px solid #D4AF37', // Gold color
+                      border: '2px solid #D4AF37', 
                       zIndex: -1,
                     }}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    transition={{ duration: 0.2 }}
+                    transition={{ duration: 0.15 }} 
                   />
                 )}
                 <div className="relative w-48 h-32 shadow-lg overflow-hidden rounded-md">
@@ -324,29 +420,15 @@ export default function Portfolio() {
                     src={work.image}
                     alt={`${work.title} Project`}
                     fill
-                    className="object-cover transition-transform duration-500 hover:scale-110"
+                    className="object-cover transition-transform duration-300 hover:scale-110" 
                   />
-                  <div className={`absolute inset-0 bg-brandBrown transition-opacity duration-200 ${
+                  <div className={`absolute inset-0 bg-brandBrown transition-opacity duration-150 ${
                     activeIndex === index + 3 ? 'opacity-0' : 'opacity-40 hover:opacity-10'
                   }`}></div>
                 </div>
               </motion.div>
             ))}
           </div>
-        </div>
-        
-        {/* Mobile navigation dots */}
-        <div className="md:hidden flex justify-center mt-4 space-x-2">
-          {works.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setActiveIndex(index)}
-              className={`w-2 h-2 rounded-full transition-all ${
-                activeIndex === index ? 'bg-brandBeige w-4' : 'bg-brandBeige bg-opacity-50'
-              }`}
-              aria-label={`Go to project ${index + 1}`}
-            />
-          ))}
         </div>
       </motion.div>
     </section>
