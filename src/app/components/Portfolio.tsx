@@ -156,9 +156,9 @@ export default function Portfolio() {
         animate={isLoaded ? "visible" : "hidden"}
       >
         {/* Frames Layout - Improved responsiveness */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 px-4 w-full">
+        <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr_1fr] gap-6 sm:gap-8 px-4 w-full">
           {/* Left Column */}
-          <div className="flex flex-col space-y-6 sm:space-y-8 items-center md:mr-4 lg:mr-60 order-2 md:order-1">
+          <div className="flex flex-col space-y-6 sm:space-y-8 items-center md:mr-4 order-2 md:order-1">
             {works.slice(0, 3).map((work, index) => (
               <motion.div
                 key={work.id}
@@ -204,13 +204,13 @@ export default function Portfolio() {
             ))}
           </div>
 
-          {/* Middle Column (Active Work Details) - Improved transitions */}
+          {/* Middle Column (Active Work Details) - Improved transitions and wider */}
           <div className="col-span-1 flex flex-col items-center justify-center h-full space-y-4 relative order-1 md:order-2 mb-8 md:mb-0">
             <AnimatePresence mode="wait">
               {works[activeIndex] && (
                 <motion.div
                   key={works[activeIndex].id}
-                  className="relative flex flex-col items-center w-full"
+                  className="relative flex flex-col items-center w-full max-w-full mx-auto" 
                   variants={detailsVariants}
                   initial="hidden"
                   animate="visible"
@@ -219,30 +219,32 @@ export default function Portfolio() {
                   <motion.div 
                     className="bg-brandBrown bg-opacity-50 backdrop-blur-sm rounded-lg p-2 w-full text-center"
                     whileHover={{ scale: 1.02 }}
-                    transition={{ type: "spring", stiffness: 400 }} // Snappier animation
+                    transition={{ type: "spring", stiffness: 400 }}
                   >
                     <h3 className="text-3xl md:text-4xl mb-2 text-brandBeige font-cinzel">{works[activeIndex].title}</h3>
                   </motion.div>
+                  
+                  {/* Wider text container */}
                   <motion.div 
-                    className="bg-brandBrown bg-opacity-50 backdrop-blur-sm rounded-lg p-4 md:p-6 w-full text-center mt-4"
+                    className="bg-brandBrown bg-opacity-50 backdrop-blur-sm rounded-lg p-4 md:p-8 w-full text-center mt-4 min-h-[240px]"
                     initial={{ y: 20, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
-                    transition={{ delay: 0.1, duration: 0.25 }} // Faster animation
+                    transition={{ delay: 0.1, duration: 0.25 }} 
                   >
-                    <p className="text-xs md:text-sm leading-relaxed tracking-wide text-brandBeige mb-4 font-cinzel">
+                    <p className="text-xs md:text-sm leading-relaxed tracking-wide text-brandBeige mb-6 font-cinzel">
                       {works[activeIndex].period}
                     </p>
-                    <p className="text-sm md:text-base leading-relaxed tracking-wide text-brandBeige">
+                    <p className="text-sm md:text-base leading-relaxed tracking-wide text-brandBeige mx-auto max-w-full">
                       {works[activeIndex].description}
                     </p>
-                    <div className="flex flex-wrap justify-center gap-2 mt-4">
+                    <div className="flex flex-wrap justify-center gap-2 mt-6">
                       {works[activeIndex].tags?.map((tag, i) => (
                         <motion.span 
                           key={i}
                           className="text-xs bg-brandBeige bg-opacity-20 text-brandBeige px-2 py-1 rounded-full"
                           initial={{ opacity: 0, scale: 0.8 }}
                           animate={{ opacity: 1, scale: 1 }}
-                          transition={{ delay: 0.15 + (i * 0.05) }} // Faster appearance
+                          transition={{ delay: 0.15 + (i * 0.05) }}
                         >
                           {tag}
                         </motion.span>
@@ -250,8 +252,7 @@ export default function Portfolio() {
                     </div>
                   </motion.div>
                   
-                  {/* Added navigation controls */}
-                  <div className="flex justify-between w-full mt-4">
+                  <div className="flex justify-between w-full mt-6">
                     <motion.button
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.9 }}
@@ -287,7 +288,7 @@ export default function Portfolio() {
           </div>
 
           {/* Right Column */}
-          <div className="flex flex-col space-y-6 sm:space-y-8 items-center md:ml-4 lg:ml-60 order-3">
+          <div className="flex flex-col space-y-6 sm:space-y-8 items-center md:ml-4 order-3">
             {works.slice(3).map((work, index) => (
               <motion.div
                 key={work.id}
